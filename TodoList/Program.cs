@@ -1,123 +1,102 @@
-﻿//Console.WriteLine("[A]dd a TODO");
-//Console.WriteLine("[S]ee all TODOs");
-//Console.WriteLine("[R]emove a TODO");
-//Console.WriteLine("[E]xit");
+﻿// Greeting & Initial Options
 
-//var userChoice = Console.ReadLine();
+string selection = "";
+List<string> todos = new List<string>();
 
-//// todo: Handle user input.)
-//if (userChoice == "A")
-//{
-//    PrintSelectedOption("Add a TODO.");
-//}
-//else if (userChoice == "S")
-//{
-//    PrintSelectedOption("See all TODOs.");
-//}
-//else if (userChoice == "R")
-//{
-//    PrintSelectedOption("Remove a TODO.");
-//}
-//else if (userChoice == "E")
-//{
-//    PrintSelectedOption("Exit.");
-//}
-
-//void PrintSelectedOption(string selectedOption) {
-//    Console.WriteLine("User selected: " + selectedOption);
-//}
-
-//Console.WriteLine("User Input: " + userChoice);
+do
+{
+    Console.WriteLine();
+    Console.WriteLine("Hello!");
+    Console.WriteLine();
+    Console.WriteLine("What would you like to do?");
+    Console.WriteLine("[S]ee all todos");
+    Console.WriteLine("[A]dd a todo");
+    Console.WriteLine("[R]emove a todo");
+    Console.WriteLine("[E]xit");
+    Console.WriteLine();
 
 
-//// Add method
-//int Add(int num1, int num2)
-//{
-//    return num1 + num2;
-//}
+    selection = Console.ReadLine().ToUpper();
 
-//int result = Add(23, 23);
+    switch(selection) {
+        case "S":
+            PrintTodos(todos);
+            break;
+        case "A":
+            AddTodo(todos);
+            break;
+        case "R":
+            RemoveTodo(todos);
+            break;
+        case "E":
+            break;
+        default:
+            Console.WriteLine("Invalid option selected, please try again.");
+            break;
+    }
+} while (selection != "E");
 
-//Console.WriteLine("The result is: " + result);
+void PrintTodos(List<string> todos){
+    Console.WriteLine("TODO List: ");
+    Console.WriteLine();
+    int counter = 1;
+    foreach(string todo in todos) {
+        Console.WriteLine($"[{counter}]: {todo}");
+        counter++;
+    }
+}
 
-//// Is longer than 10 characters method
+void AddTodo(List<string> todos) {
+    Console.WriteLine("Write the todo you would like to add then press 'Enter'.");
+    string todo = Console.ReadLine();
 
-//bool result2 = IsLongerThan10Characters("My longest message.");
+    if(todos.IndexOf(todo) != -1) {
+        Console.WriteLine("This todo already exists, please try again.");
+    } else {
+        todos.Add(todo);
+        Console.WriteLine($"TODO added successfully: {todo}");
+    }
+}
 
-//bool IsLongerThan10Characters(string message)
-//{
-//    return message.Length > 10;
-//}
+void RemoveTodo(List<string> todos) {
+    // Print a menu to show the user what they can delete.
+    bool isSuccessfullyRemoved = false;
+    do {
+        // Check to see if there are any todos to delete.
+        if(todos.Count == 0) {
+            Console.WriteLine("You don't have any todos to delete at this time.");
+            return;
+        }
 
-//Console.WriteLine("Is your message longer than 10 characters? " + result2);
+        // Print the delete menu.
+        Console.WriteLine("Enter the number of the todo you would like to delete.");
+        for (int i = 0; i < todos.Count; i++)
+        {
+            Console.WriteLine($"[{i + 1}]: {todos[i]}");
+        }
+        string selection = Console.ReadLine();
 
-//Console.ReadKey();
+        // Check to see if the value is numeric.
+        bool isNumeric = int.TryParse(selection, out int index);
 
+        if (!isNumeric) {
+            Console.WriteLine($"The value you entered '{selection}' is not a number.");
+            continue;
+        }
 
-//Console.WriteLine("Provide a number.");
+        // Check to see if the value entered is within the bounds.
+        if(index - 1 < 0 || index - 1 >= todos.Count) {
+            Console.WriteLine($"The value you entered '{index}' is not in the list.");
+            continue;
+        }
 
-//int number = int.Parse(Console.ReadLine());
+        // Remove the item and end the loop.
+        todos.RemoveAt(index - 1);
+        isSuccessfullyRemoved = true;
 
-//Console.WriteLine("The number you entered is: " + number);
-
-//Console.ReadKey();
-
-/*  
- *  This 
- *  is 
- *  a 
- *  multi-line
- *  comment
-*/
-
-// Variable Declaration and Initialization
-//string userInput = "A";
-//Console.WriteLine(userInput);
-
-//userInput = "B";
-//Console.WriteLine(userInput);
-
-//int number = 0;
-//number = 7;
-//number = 8;
-//number = 9;
-
-//int num1 = 1, num2 = 5;
-
-//string fName, lName;
-
-//Console.WriteLine(number);
-
-// Naming variables in C#
-// Cannot use reserved words as a variable name.
-// int int = 100; --> Fails
-
-// The first character cannot be a digit.
-// int 2num = 2; --> Fails
-
-// C# is case sensitive so count and Count are two difference variables.
-//int count = 2;
-//Count = 2;
-// Fails --> Count is not defined.
+    } while (!isSuccessfullyRemoved);
+}
 
 
 
-////////////////////////////// OPERATORS ///////////////////////////////
-//int a = 5;
-//a++;
-//int b = 20;
-//b--;
 
-//Console.WriteLine("ADDITION: " + (a + b));
-//Console.WriteLine("SUBTRACTION: " + (a - b));
-//Console.WriteLine("MULTIPLICATION: " + a * b);
-//Console.WriteLine("DIVISION: " + a / b);
-
-//Console.WriteLine("Shane" + " " + "Kobylecky," + " I am " + 23 + " years old.");
-
-//// Implicity Typed Variables.
-//// Must be initialized. The complier has to be able to infer the type.
-//var fName = "Shane";
-//var age = 26;
-
-//fName = "Kobylecky";
