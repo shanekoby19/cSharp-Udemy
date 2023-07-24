@@ -32,6 +32,9 @@ Console.WriteLine("The height of rectangle 2: " + rectangle2.Height);
 Console.WriteLine("The circumference of rectangle 2: " + circumference2);
 Console.WriteLine("The area of rectangle 2: " + area2);
 
+// Static property
+Console.WriteLine("The number of rectangles created so far is: " + Rectangle.NumberOfRectanglesCreated);
+
 
 // Medical Appointment
 MedicalAppointment myMedicalAppointment = new MedicalAppointment("Shane Kobylecky", new DateTime(2023, 7, 18));
@@ -68,6 +71,7 @@ class Rectangle {
     // the class constructor.
     public int Width { get; private set; }
     public int Height { get; private set; }
+    public static int NumberOfRectanglesCreated { get; private set; }
 
     // Constructor
     // 1.) Constructor method must have the same name as the class.
@@ -77,6 +81,7 @@ class Rectangle {
     public Rectangle(int width, int height) {
         Width = width;
         Height = height;
+        NumberOfRectanglesCreated += 1;
     }
 
     // Methods
@@ -163,6 +168,9 @@ public class MedicalAppointment {
 
 
 /////////////////////////// STATIC CLASSES & METHODS ///////////////////////////
+// static classes can be created when all methods of the class are static and
+// the class doesn't need any stateful data.
+// This class will not be able to instanciate objects. You can't: new Calculator()
 static class Calculator
 {
     public static int Add(int a, int b) => a + b;
